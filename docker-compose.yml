@@ -1,0 +1,18 @@
+version: '3'
+services: 
+  nginx: 
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/logs:/var/log/nginx
+      - ./app:/usr/share/nginx/html
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    build: ./php-fpm
+    expose:
+      - "9000"
+    volumes:
+      - ./app:/usr/share/nginx/html
