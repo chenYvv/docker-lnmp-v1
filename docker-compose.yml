@@ -1,5 +1,6 @@
 version: '3'
 services: 
+
   nginx: 
     build: ./nginx
     ports:
@@ -8,11 +9,24 @@ services:
       - ./nginx/logs:/var/log/nginx
       - ./app:/usr/share/nginx/html
     depends_on:
-      - php-fpm
+      - php-fpm71
 
-  php-fpm:
-    build: ./php-fpm
+  php-fpm71:
+    build: ./php-fpm71
     expose:
       - "9000"
     volumes:
       - ./app:/usr/share/nginx/html
+    depends_on:
+      - mysql
+
+  mysql:
+    build: ./mysql
+    ports:
+      - "3306:3306"
+    # volumes:
+    #   - ./conf/my.cnf:/etc/mysql/my.cnf:ro
+    #   - ./mysql/:/var/lib/mysql/:rw
+    #   - ./log/:/var/log/dnmp/:rw
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
