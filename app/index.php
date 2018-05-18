@@ -3,7 +3,7 @@
 
 // 建立连接
 try{
-    $dbh = new PDO("mysql:host=172.20.0.2;dbname=mysql", "root", 123456);
+    $dbh = new PDO("mysql:host=mysql;dbname=mysql", "root", 123456);
     $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     $dbh->exec("SET CHARACTER SET utf8");
     $dbh=null; //断开连接   
