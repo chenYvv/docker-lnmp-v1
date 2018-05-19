@@ -9,24 +9,35 @@ services:
       - ./nginx/logs:/var/log/nginx
       - ./app:/usr/share/nginx/html
     depends_on:
-      - php-fpm71
+      - php
 
-  php-fpm71:
-    build: ./php-fpm71
+  php:
+    build: ./php-fpm71-alpine
     expose:
       - "9000"
     volumes:
       - ./app:/usr/share/nginx/html
+      - ./php-fpm71-alpine/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./php-fpm71-alpine/logs/:/var/log/
     depends_on:
       - mysql
+      - redis
 
   mysql:
     build: ./mysql
     ports:
       - "3306:3306"
-    # volumes:
-    #   - ./conf/my.cnf:/etc/mysql/my.cnf:ro
-    #   - ./mysql/:/var/lib/mysql/:rw
-    #   - ./log/:/var/log/dnmp/:rw
+    volumes:
+      - ./mysql/data/:/var/lib/mysql/
+      - ./mysql/logs/:/var/log/mysql/
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
+
+  redis:
+    build: ./redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - "./redis/data:/data/"
+    environment:
+      REDIS_PASSWORD: "123456"

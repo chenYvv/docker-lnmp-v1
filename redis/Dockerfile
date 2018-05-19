@@ -1,6 +1,4 @@
-FROM nginx:1.13.1-alpine
-
-COPY ./conf.d/ /etc/nginx/conf.d/
+FROM redis:3.2-alpine
 
 # 修改为国内源, v3.7要和所使用alpine版本一致
 RUN cp /etc/apk/repositories /etc/apk/repositories.bak \
