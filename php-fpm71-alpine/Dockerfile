@@ -3,6 +3,9 @@ FROM php:7.1-fpm-alpine
 # redis 版本
 ENV PHPREDIS_VERSION 3.1.6
 
+# 安装composer
+COPY composer.phar /usr/local/bin/composer
+
 # 修改为国内源, v3.4要和所使用alpine版本一致
 RUN cp /etc/apk/repositories /etc/apk/repositories.bak \
     && echo "http://mirrors.aliyun.com/alpine/v3.4/main/" > /etc/apk/repositories \
