@@ -12,13 +12,13 @@ services:
       - php
 
   php:
-    build: ./php-fpm71-alpine
+    build: ./php71
     expose:
       - "9000"
     volumes:
       - ./app:/var/www/html
-      - ./php-fpm71-alpine/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf
-      - ./php-fpm71-alpine/logs/:/var/log/
+      - ./php71/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./php71/logs/:/var/log/
     depends_on:
       - mysql
       - redis
