@@ -26,6 +26,11 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && docker-php-ext-install redis \
   #如果这段不加构建的镜像将大100M      
     && rm -rf /usr/src/php \
+  #安装 npm
+    && apt-get install npm -y \
+  #安装 node
+    && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+    && apt-get install -y nodejs \
   #安装yarn
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
