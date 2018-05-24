@@ -27,7 +27,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
   #如果这段不加构建的镜像将大100M      
     && rm -rf /usr/src/php \
     && apt-get update && apt-get install wget apt-transport-https gnupg zip unzip -y \
-  #安装 node
+  #安装 node 和 npm
     && cd /opt/ \
     && wget https://nodejs.org/dist/v8.11.2/node-v8.11.2-linux-x64.tar.xz \
     && tar -xJf node-v8.11.2-linux-x64.tar.xz \
@@ -38,5 +38,8 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update && apt-get install yarn -y\
+  #npm 换源   
+    && npm config set registry https://registry.npm.taobao.org \
+    && npm config set disturl https://npm.taobao.org/dist \
   #composer 国内源
     && composer config -g repo.packagist composer https://packagist.phpcomposer.com
