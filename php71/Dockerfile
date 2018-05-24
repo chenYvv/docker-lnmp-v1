@@ -26,7 +26,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && docker-php-ext-install redis \
   #如果这段不加构建的镜像将大100M      
     && rm -rf /usr/src/php \
-    && apt-get install wget -y \
+    && apt-get update && apt-get install wget apt-transport-https gnupg -y \
   #安装 node
     && cd /opt/ \
     && wget https://nodejs.org/dist/v8.11.2/node-v8.11.2-linux-x64.tar.xz \
@@ -35,7 +35,6 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && ln -s /opt/node-v8.11.2-linux-x64/bin/npm /usr/local/bin/npm \
     && rm node-v8.11.2-linux-x64.tar.xz \
   #安装 yarn
-    && apt-get update && apt-get install apt-transport-https -y \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update && apt-get install yarn -y\
