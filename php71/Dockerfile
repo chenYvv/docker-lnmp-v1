@@ -26,7 +26,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && docker-php-ext-install redis \
   #如果这段不加构建的镜像将大100M      
     && rm -rf /usr/src/php \
-    && apt-get update && apt-get install wget apt-transport-https gnupg -y \
+    && apt-get update && apt-get install wget apt-transport-https gnupg zip unzip -y \
   #安装 node
     && cd /opt/ \
     && wget https://nodejs.org/dist/v8.11.2/node-v8.11.2-linux-x64.tar.xz \
