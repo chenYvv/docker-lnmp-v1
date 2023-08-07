@@ -20,8 +20,8 @@ services:
     ports:
       - "81:80"
     volumes:
-      - /www/web1:/usr/share/nginx/html
-      - /data/nginx/conf.d/Web1.conf:/etc/nginx/conf.d/Web1.conf:ro
+      - ./app/web1:/usr/share/nginx/html
+      - ./nginx/conf.d/Web1.conf:/etc/nginx/conf.d/Web1.conf:ro
     restart: always
     networks:
       - default
