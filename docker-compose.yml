@@ -2,7 +2,7 @@ version: '3'
 services:
   nginx:
     container_name: service-nginx
-    image: redis:alpine
+    image: nginx:1.17
     ports:
       - "8000:80"
     volumes:
